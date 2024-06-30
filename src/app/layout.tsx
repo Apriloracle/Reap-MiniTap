@@ -29,7 +29,7 @@ export default function RootLayout({
           {children}
           <div id="notification" style={{ height: '469px' }}></div>
         </Web3ModalProvider>
-        <Script src="https://srv.cpx-research.com/index.php?id=YOUR_APP_ID" strategy="afterInteractive" />
+        <Script src="https://srv.cpx-research.com/index.php?id=16548" strategy="afterInteractive" />
         <Script id="cpx-research-config" strategy="afterInteractive">
           {`
             var cpxResearch = {
