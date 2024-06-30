@@ -11,7 +11,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.45.1",
     "@web3modal/wagmi": "^5.0.2",
-    "cpx-research-sdk-react": "^0.1.0",
+    "cpx-research-sdk-react": "^1.1.0",
     "ethers": "^6.13.1",
     "next": "14.2.4",
     "react": "^18",
