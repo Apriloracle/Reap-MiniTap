@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { headers } from "next/headers";
+
 import { cookieToInitialState } from 'wagmi'
 import { config } from "@/utils/config";
 import Web3ModalProvider from "@/utils/context";
 import Navbar from "@/components/Navbar";
-import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,30 +27,10 @@ export default function RootLayout({
         <Web3ModalProvider initialState={initialState}>
           <Navbar />
           {children}
-          <div id="notification" style={{ height: '469px' }}></div>
-        </Web3ModalProvider>
-        <Script src="https://srv.cpx-research.com/index.php?id=16548" strategy="afterInteractive" />
-        <Script id="cpx-research-config" strategy="afterInteractive">
-          {`
-            var cpxResearch = {
-              siteLogo: "",
-              siteLogoWidth: 150,
-              siteLogoHeight: 40,
-              position: "right",
-              cornerRadius: 5,
-              backgroundColor: "f1f1f1",
-              textColor: "#000000",
-              hoverColor: "#4E73DF",
-              btnColor1: "#4E73DF",
-              btnColor2: "#4E73DF",
-              language: "en",
-              subId: "YOUR_SUB_ID",
-              subId2: "",
-              webMaster: "YOUR_WEBMASTER_ID"
-            };
-          `}
-        </Script>
-      </body>
+          </Web3ModalProvider>
+        </body>
     </html>
+  );
+}
   );
 }
