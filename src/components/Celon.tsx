@@ -1,7 +1,8 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { createWalletClient, custom } from 'viem';
-import { mainnet, celo, celoAlfajores } from 'viem/chains';
+import { celo } from 'viem/chains';
+import { setCeloAddress } from '@/utils/store';
 
 declare global {
     interface Window {
@@ -23,6 +24,7 @@ const Celon = () => {
                 const addresses = await client.getAddresses();
                 if (addresses && addresses.length > 0) {
                     setAddress(addresses[0]);
+                    setCeloAddress(addresses[0]); // Set the address in TinyBase
                 }
             } else {
                 console.error('Ethereum provider not found');
@@ -38,7 +40,7 @@ const Celon = () => {
 
     return (
         <div className='text-sm'>
-            {address ? `celo Address: ${address}` : 'Loading...'}
+            {address ? `Celo Address: ${truncateAddress(address)}` : 'Loading...'}
         </div>
     );
 };
