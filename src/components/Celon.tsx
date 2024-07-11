@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { createWalletClient, custom } from 'viem';
 import { celo } from 'viem/chains';
-import { setCeloAddress } from '@/utils/store';
 
 declare global {
     interface Window {
@@ -10,39 +9,46 @@ declare global {
     }
 }
 
-const Celon = () => {
-    const [address, setAddress] = useState<string | null>(null);
+class Celon extends React.Component<{}, { address: string | null }> {
+    constructor(props: {}) {
+        super(props);
+        this.state = { address: null };
+    }
 
-    useEffect(() => {
-        const fetchAddress = async () => {
-            if (typeof window.ethereum !== 'undefined') {
-                const client = createWalletClient({
-                    chain: celo,
-                    transport: custom(window.ethereum),
-                });
+    componentDidMount() {
+        this.fetchAddress();
+    }
 
-                const addresses = await client.getAddresses();
-                if (addresses && addresses.length > 0) {
-                    setAddress(addresses[0]);
-                    setCeloAddress(addresses[0]); // Set the address in TinyBase
-                }
-            } else {
-                console.error('Ethereum provider not found');
+    async fetchAddress() {
+        if (typeof window.ethereum !== 'undefined') {
+            const client = createWalletClient({
+                chain: celo,
+                transport: custom(window.ethereum),
+            });
+
+            const addresses = await client.getAddresses();
+            if (addresses && addresses.length > 0) {
+                this.setState({ address: addresses[0] });
             }
-        };
+        } else {
+            console.error('Ethereum provider not found');
+        }
+    }
 
-        fetchAddress();
-    }, []);
+    async getAddress(): Promise<string | null> {
+        if (!this.state.address) {
+            await this.fetchAddress();
+        }
+        return this.state.address;
+    }
 
-    const truncateAddress = (address: string) => {
-        return `${address.slice(0, 4)}...${address.slice(-4)}`;
-    };
-
-    return (
-        <div className='text-sm'>
-            {address ? `Celo Address: ${truncateAddress(address)}` : 'Loading...'}
-        </div>
-    );
-};
+    render() {
+        return (
+            <div className='text-sm'>
+                {this.state.address ? `Celo Address: ${this.state.address}` : 'Loading...'}
+            </div>
+        );
+    }
+}
 
 export default Celon;
