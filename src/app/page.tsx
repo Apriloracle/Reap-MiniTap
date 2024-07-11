@@ -9,12 +9,12 @@ export default function Home() {
       <Celon />
       <div className="w-full max-w-[480px]">
         <SquidWidget config={{
-          integratorId: "your-partner-id-here", // Replace with your actual partner ID
+          integratorId: "april-token-ae727f3a-94f1-4983-aba4-4f842803a827", // Replace with your actual partner ID
           companyName: "Celo App",
           slippage: 1,
           infiniteApproval: false,
           instantExec: false,
-          apiUrl: "https://api.0xsquid.com",
+          apiUrl: "https://v2.api.squidrouter.com",
           priceImpactWarnings: {
             warning: 3,
             critical: 5,
