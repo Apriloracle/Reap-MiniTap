@@ -86,14 +86,14 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
         const { address, isLoading, transactionHash, error } = this.state;
 
         return (
-            <div className='flex flex-col items-center space-y-4'>
+                 <div className='flex flex-col items-center space-y-4'>
                 <div className='text-sm'>
                     {address ? `Celo Address: ${address}` : 'Loading...'}
                 </div>
                 <button
                     onClick={this.handleTransfer}
                     disabled={isLoading || !address}
-                    className="w-24 h-24 bg-orange-500 text-white rounded-full hover:bg-orange-600 disabled:bg-gray-400 flex items-center justify-center transition-all"
+                    className="w-60 h-60 bg-orange-500 text-white rounded-full hover:bg-orange-600 disabled:bg-gray-400 flex items-center justify-center transition-all text-xl font-medium"
                 >
                     {isLoading ? 'Transferring...' : 'Tap to earn'}
                 </button>
