@@ -93,7 +93,19 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                 <button
                     onClick={this.handleTransfer}
                     disabled={isLoading || !address}
-                    className="w-40 h-40 bg-[#f05e23] text-black rounded-full hover:bg-orange-600 disabled:bg-gray-400 flex items-center justify-center transition-all"
+                    className="w-40 h-40 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
+                        text-white rounded-full flex items-center justify-center 
+                        text-lg font-medium transition-all duration-300 ease-in-out
+                        shadow-[0_10px_20px_rgba(240,94,35,0.3)] 
+                        hover:shadow-[0_15px_30px_rgba(240,94,35,0.5)]
+                        active:shadow-[0_5px_10px_rgba(240,94,35,0.3)]
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                        transform hover:-translate-y-1 active:translate-y-1
+                        before:content-[''] before:absolute before:top-0 before:left-0 
+                        before:w-full before:h-full before:rounded-full
+                        before:bg-gradient-to-br before:from-white/20 before:to-transparent 
+                        before:opacity-0 hover:before:opacity-100 before:transition-opacity
+                        relative overflow-hidden"
                 >
                     {isLoading ? 'Transferring...' : 'Tap to earn'}
                 </button>
