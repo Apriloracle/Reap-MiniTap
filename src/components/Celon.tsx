@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { createWalletClient, custom } from 'viem';
 import { celo } from 'viem/chains';
 
@@ -42,9 +42,30 @@ class Celon extends React.Component<{}, { address: string | null }> {
         return this.state.address;
     }
 
-    handleButtonClick = () => {
-        console.log('Button clicked!');
-        // Add your button click logic here
+    handleButtonClick = async () => {
+        if (!this.state.address) {
+            console.log('Please connect your wallet first.');
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/mint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userWalletAddress: this.state.address }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Minting failed');
+            }
+
+            const data = await response.json();
+            console.log('Minting successful:', data);
+        } catch (error) {
+            console.error('Error during minting:', error);
+        }
     }
 
     render() {
@@ -57,7 +78,7 @@ class Celon extends React.Component<{}, { address: string | null }> {
                     onClick={this.handleButtonClick}
                     className='w-32 h-32 bg-orange-500 rounded-full text-white font-bold text-xl shadow-lg hover:bg-orange-600 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-orange-300'
                 >
-                    Click Me
+                    Mint NFT
                 </button>
             </div>
         );
