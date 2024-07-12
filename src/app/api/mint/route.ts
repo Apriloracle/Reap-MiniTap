@@ -5,13 +5,15 @@ export async function POST(request: Request) {
 
   try {
     const response = await fetch(
-      "https://engine-production-8f21.up.railway.app/contract/42220/0xE84ca0aC757F9a934a26CfbebDeA40DD3491041f/erc721/mint-to",
+      "https://engine-production-8f21.up.railway.app/contract/42220/0xE84ca0aC757F9a934a26CfbebDeA40DD3491041f/erc721/mint-to?simulateTx=false",
       {
         method: "POST",
         headers: {
+          "accept": "application/json",
           "Content-Type": "application/json",
-          Authorization: "Bearer c5f6b4a04b50e000baf3519fd5e7de99",
           "x-backend-wallet-address": "0xf7f6772024E2c2B8A2FBa74Bd456647f5c3D5852",
+          "Authorization": "Bearer 30lqWCBf5051sobcz6cCx4i7lEmgA_J-jiVa8E3_riB9418ij34SuETgmbwni9Pkh-8QxtX-5VeZzJvkkmgATA",
+          "ngrok-skip-browser-warning": "true"
         },
         body: JSON.stringify({
           receiver: userWalletAddress,
@@ -25,13 +27,14 @@ export async function POST(request: Request) {
     );
 
     if (!response.ok) {
-      throw new Error('Minting failed');
+      const errorData = await response.json();
+      throw new Error(`Minting failed: ${JSON.stringify(errorData)}`);
     }
 
     const data = await response.json();
     return NextResponse.json({ message: "NFT minted successfully!", data });
   } catch (error) {
     console.error('Error during minting:', error);
-    return NextResponse.json({ message: 'Error occurred during minting' }, { status: 500 });
+    return NextResponse.json({ message: 'Error occurred during minting', error: error.message }, { status: 500 });
   }
 }
