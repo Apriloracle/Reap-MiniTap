@@ -95,7 +95,7 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                     disabled={isLoading || !address}
                     className="w-40 h-40 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
                         text-white rounded-full flex items-center justify-center 
-                        text-lg font-medium transition-all duration-300 ease-in-out
+                        text-lg font-bold transition-all duration-300 ease-in-out
                         shadow-[0_10px_20px_rgba(240,94,35,0.3)] 
                         hover:shadow-[0_15px_30px_rgba(240,94,35,0.5)]
                         active:shadow-[0_5px_10px_rgba(240,94,35,0.3)]
