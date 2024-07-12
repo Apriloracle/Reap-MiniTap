@@ -5,7 +5,7 @@ const Navbar = () => {
         <div className='flex w-full text-white py-4 px-8 bg-[#f05e23]'>
             <div className='flex flex-row justify-between w-full'>
                 <div>
-                    Mini Tap
+                    REAP MiniTap
                 </div>
                 <div>
                     
