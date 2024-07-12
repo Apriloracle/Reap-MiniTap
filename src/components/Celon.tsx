@@ -24,7 +24,7 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
 
         this.engine = new Engine({
             url: "https://engine-production-0cf4.up.railway.app",
-            accessToken: "ebb92649a298e9796e23624e362da844",
+            accessToken: "bc807060ba8cc95baeb82cdd306412ce",
         });
     }
 
