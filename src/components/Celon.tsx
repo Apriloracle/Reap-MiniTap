@@ -1,4 +1,3 @@
-'use client'
 import React from 'react';
 import { createWalletClient, custom } from 'viem';
 import { celo } from 'viem/chains';
@@ -35,13 +34,6 @@ class Celon extends React.Component<{}, { address: string | null }> {
         }
     }
 
-    async getAddress(): Promise<string | null> {
-        if (!this.state.address) {
-            await this.fetchAddress();
-        }
-        return this.state.address;
-    }
-
     handleButtonClick = async () => {
         if (!this.state.address) {
             console.log('Please connect your wallet first.');
@@ -49,22 +41,38 @@ class Celon extends React.Component<{}, { address: string | null }> {
         }
 
         try {
-            const response = await fetch('/api/mint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ userWalletAddress: this.state.address }),
-            });
+            const response = await fetch(
+                "https://engine-production-8f21.up.railway.app/contract/42220/0xE84ca0aC757F9a934a26CfbebDeA40DD3491041f/erc721/mint-to",
+                {
+                    method: "POST",
+                    headers: {
+                        "accept": "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer 30lqWCBf5051sobcz6cCx4i7lEmgA_J-jiVa8E3_riB9418ij34SuETgmbwni9Pkh-8QxtX-5VeZzJvkkmgATA",
+                        "x-backend-wallet-address": "0xf7f6772024E2c2B8A2FBa74Bd456647f5c3D5852",
+                    },
+                    body: JSON.stringify({
+                        receiver: this.state.address,
+                        metadata: {
+                            name: "Reap Membership",
+                            description: "Reap loyalty program for users",
+                            image: "ipfs://QmciR3WLJsf2BgzTSjbG5zCxsrEQ8PqsHK7JWGWsDSNo46/nft.png"
+                        }
+                    }),
+                }
+            );
 
             if (!response.ok) {
-                throw new Error('Minting failed');
+                const errorData = await response.json();
+                throw new Error(`Minting failed: ${JSON.stringify(errorData)}`);
             }
 
             const data = await response.json();
             console.log('Minting successful:', data);
+            // Update UI to show success message
         } catch (error) {
-            console.error('Error during minting:', error);
+            console.error('Error during minting:', error instanceof Error ? error.message : 'Unknown error');
+            // Update UI to show error message
         }
     }
 
