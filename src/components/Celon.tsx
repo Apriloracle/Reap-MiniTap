@@ -95,7 +95,7 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                     disabled={isLoading || !address}
                     className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
                 >
-                    {isLoading ? 'Transferring...' : 'Transfer ERC20 Token'}
+                    {isLoading ? 'Transferring...' : 'Tap to earn'}
                 </button>
                 {transactionHash && (
                     <p className="text-green-500">
