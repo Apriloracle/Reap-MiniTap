@@ -93,18 +93,19 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                         onClick={this.handleTransfer}
                         disabled={isLoading || !address}
                         className={`
-                            w-52 h-52 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
-                            text-white rounded-full flex items-center justify-center 
-                            text-xl font-bold transition-all duration-300 ease-in-out
-                            shadow-[0_0_30px_rgba(240,94,35,0.5)] 
-                            hover:shadow-[0_0_50px_rgba(240,94,35,0.7)]
-                            disabled:opacity-50 disabled:cursor-not-allowed
-                            transform hover:scale-105
-                            before:content-[''] before:absolute before:top-0 before:left-0 
-                            before:w-full before:h-full before:rounded-full
-                            before:bg-gradient-to-br before:from-white/20 before:to-transparent 
-                            before:opacity-0 hover:before:opacity-100 before:transition-opacity
-                            relative overflow-hidden
+                        w-52 h-52 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
+                        text-white rounded-full flex items-center justify-center 
+                        text-lg font-bold transition-all duration-300 ease-in-out
+                        shadow-[0_10px_20px_rgba(240,94,35,0.3)] 
+                        hover:shadow-[0_15px_30px_rgba(240,94,35,0.5)]
+                        active:shadow-[0_5px_10px_rgba(240,94,35,0.3)]
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                        transform hover:-translate-y-1 active:translate-y-1
+                        before:content-[''] before:absolute before:top-0 before:left-0 
+                        before:w-full before:h-full before:rounded-full
+                        before:bg-gradient-to-br before:from-white/20 before:to-transparent 
+                        before:opacity-0 hover:before:opacity-100 before:transition-opacity
+                        relative overflow-hidden
                         `}
                     >
                         <span className="relative z-10">
