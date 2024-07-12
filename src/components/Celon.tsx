@@ -75,7 +75,6 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                 }
             );
 
-            this.setState({ transactionHash: result.transactionHash });
         } catch (err) {
             this.setState({ error: err instanceof Error ? err.message : String(err) });
         } finally {
