@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { createWalletClient, custom } from 'viem';
 import { celo } from 'viem/chains';
+import { Engine } from "@thirdweb-dev/engine";
 
 declare global {
     interface Window {
@@ -9,10 +10,22 @@ declare global {
     }
 }
 
-class Celon extends React.Component<{}, { address: string | null }> {
+class Celon extends React.Component<{}, { address: string | null; isLoading: boolean; transactionHash: string | null; error: string | null }> {
+    private engine: Engine;
+
     constructor(props: {}) {
         super(props);
-        this.state = { address: null };
+        this.state = { 
+            address: null, 
+            isLoading: false, 
+            transactionHash: null, 
+            error: null 
+        };
+
+        this.engine = new Engine({
+            url: "https://engine-production-8f21.up.railway.app",
+            accessToken: "ebb92649a298e9796e23624e362da844",
+        });
     }
 
     componentDidMount() {
@@ -42,23 +55,57 @@ class Celon extends React.Component<{}, { address: string | null }> {
         return this.state.address;
     }
 
-    handleButtonClick = () => {
-        console.log('Button clicked!');
-        // Add your button click logic here
-    }
+    handleTransfer = async () => {
+        this.setState({ isLoading: true, error: null, transactionHash: null });
+
+        try {
+            const address = await this.getAddress();
+
+            if (!address) {
+                throw new Error("Celo address not found");
+            }
+
+            const result = await this.engine.erc20.transfer(
+                "42220", // Celo Alfajores Testnet chain ID
+                "0x18719D2e1e57A1A64708e4550fF3DEF9d1074621", // Example ERC20 contract address on Celo Alfajores
+                "0xf7f6772024E2c2B8A2FBa74Bd456647f5c3D5852", // Backend wallet address
+                {
+                    toAddress: address,
+                    amount: "1.0", // Transfer 1 token
+                }
+            );
+
+            this.setState({ transactionHash: result.transactionHash });
+        } catch (err) {
+            this.setState({ error: err instanceof Error ? err.message : String(err) });
+        } finally {
+            this.setState({ isLoading: false });
+        }
+    };
 
     render() {
+        const { address, isLoading, transactionHash, error } = this.state;
+
         return (
-            <div className='flex flex-col items-center'>
-                <div className='text-sm mb-4'>
-                    {this.state.address ? `Celo Address: ${this.state.address}` : 'Loading...'}
+            <div className='flex flex-col items-center space-y-4'>
+                <div className='text-sm'>
+                    {address ? `Celo Address: ${address}` : 'Loading...'}
                 </div>
-                <button 
-                    onClick={this.handleButtonClick}
-                    className='w-32 h-32 bg-orange-500 rounded-full text-white font-bold text-xl shadow-lg hover:bg-orange-600 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-orange-300'
+                <button
+                    onClick={this.handleTransfer}
+                    disabled={isLoading || !address}
+                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
                 >
-                    Click Me
+                    {isLoading ? 'Transferring...' : 'Transfer ERC20 Token'}
                 </button>
+                {transactionHash && (
+                    <p className="text-green-500">
+                        Transfer successful! Transaction hash: {transactionHash}
+                    </p>
+                )}
+                {error && (
+                    <p className="text-red-500">Error: {error}</p>
+                )}
             </div>
         );
     }
