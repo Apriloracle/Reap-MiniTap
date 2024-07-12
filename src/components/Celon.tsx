@@ -93,7 +93,7 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                 <button
                     onClick={this.handleTransfer}
                     disabled={isLoading || !address}
-                    className="w-40 h-40 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
+                    className="w-50 h-50 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
                         text-white rounded-full flex items-center justify-center 
                         text-lg font-bold transition-all duration-300 ease-in-out
                         shadow-[0_10px_20px_rgba(240,94,35,0.3)] 
