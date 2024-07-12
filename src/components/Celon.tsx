@@ -86,14 +86,14 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
         const { address, isLoading, transactionHash, error } = this.state;
 
         return (
-       <div className='flex flex-col items-center justify-center h-screen text-white relative'>
-                <div className='absolute top-0 left-0 w-full h-full bg-black opacity-50 z-0'></div>
-                <div className='relative z-10 flex flex-col items-center space-y-8'>
-                    <button
-                        onClick={this.handleTransfer}
-                        disabled={isLoading || !address}
-                        className={`
-                        w-52 h-52 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
+           <div className='flex flex-col items-center space-y-4'>
+                <div className='text-sm'>
+                    {address ? `Celo Address: ${address}` : 'Loading...'}
+                </div>
+                <button
+                    onClick={this.handleTransfer}
+                    disabled={isLoading || !address}
+                    className="w-52 h-52 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
                         text-white rounded-full flex items-center justify-center 
                         text-lg font-bold transition-all duration-300 ease-in-out
                         shadow-[0_10px_20px_rgba(240,94,35,0.3)] 
@@ -105,22 +105,18 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                         before:w-full before:h-full before:rounded-full
                         before:bg-gradient-to-br before:from-white/20 before:to-transparent 
                         before:opacity-0 hover:before:opacity-100 before:transition-opacity
-                        relative overflow-hidden
-                        `}
-                    >
-                        <span className="relative z-10">
-                            {isLoading ? 'Transferring...' : 'Tap to earn'}
-                        </span>
-                    </button>
-                    {transactionHash && (
-                        <p className="text-green-500 mt-4 text-center">
-                            Transfer successful!<br/>Transaction hash: {transactionHash}
-                        </p>
-                    )}
-                    {error && (
-                        <p className="text-red-500 mt-4 text-center">Error: {error}</p>
-                    )}
-                </div>
+                        relative overflow-hidden"
+                >
+                    {isLoading ? 'Transferring...' : 'Tap to earn'}
+                </button>
+                {transactionHash && (
+                    <p className="text-green-500">
+                        Transfer successful! Transaction hash: {transactionHash}
+                    </p>
+                )}
+                {error && (
+                    <p className="text-red-500">Error: {error}</p>
+                )}
             </div>
         );
     }
