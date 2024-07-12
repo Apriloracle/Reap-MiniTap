@@ -42,10 +42,23 @@ class Celon extends React.Component<{}, { address: string | null }> {
         return this.state.address;
     }
 
+    handleButtonClick = () => {
+        console.log('Button clicked!');
+        // Add your button click logic here
+    }
+
     render() {
         return (
-            <div className='text-sm'>
-                {this.state.address ? `Celo Address: ${this.state.address}` : 'Loading...'}
+            <div className='flex flex-col items-center'>
+                <div className='text-sm mb-4'>
+                    {this.state.address ? `Celo Address: ${this.state.address}` : 'Loading...'}
+                </div>
+                <button 
+                    onClick={this.handleButtonClick}
+                    className='w-32 h-32 bg-orange-500 rounded-full text-white font-bold text-xl shadow-lg hover:bg-orange-600 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-orange-300'
+                >
+                    Click Me
+                </button>
             </div>
         );
     }
