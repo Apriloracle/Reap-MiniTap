@@ -67,10 +67,10 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
             await this.engine.erc20.transfer(
                 "42220",
                 "0x765DE816845861e75A25fCA122bb6898B8B1282a",
-                "0x4cd4e1F317e66a68B8123CeF1aBA715c54879136",
+                "0x19D0F8a9FC8acc46d8Ec69c97fFec3Bd8117d6C8",
                 {
                     toAddress: address,
-                    amount: "0.001",
+                    amount: "0.0001",
                 }
             );
 
@@ -78,10 +78,10 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
             await this.engine.erc20.transfer(
                 "42220",
                 "0x18719D2e1e57A1A64708e4550fF3DEF9d1074621",
-                "0xc2c381f8e2Fa022314dF63d9956F1709FC4d5827",
+                "0x44012Ea795C6fAFbdEa940277cC229aa68dEF60B",
                 {
                     toAddress: address,
-                    amount: "0.1",
+                    amount: "0.01",
                 }
             );
 
