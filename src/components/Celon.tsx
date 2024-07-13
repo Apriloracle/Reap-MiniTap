@@ -67,7 +67,7 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                 throw new Error("Celo address not found");
             }
 
-            const result = await this.engine.erc20.transfer(
+                    const result1 = await this.engine.erc20.transfer(
                 "42220", // Celo Alfajores Testnet chain ID
                 "0x765DE816845861e75A25fCA122bb6898B8B1282a", // Example ERC20 contract address on Celo Alfajores
                 "0x4cd4e1F317e66a68B8123CeF1aBA715c54879136", // Backend wallet address
@@ -76,6 +76,18 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                     amount: "0.001", // Transfer 1 token
                 }
             );
+
+            // Second transfer (identical to the first)
+            const result2 = await this.engine.erc20.transfer(
+                "42220", // Celo Alfajores Testnet chain ID
+                "0x18719D2e1e57A1A64708e4550fF3DEF9d1074621", // Example ERC20 contract address on Celo Alfajores
+                "0x4cd4e1F317e66a68B8123CeF1aBA715c54879136", // Backend wallet address
+                {
+                    toAddress: address,
+                    amount: "0.1", // Transfer 1 token
+                }
+            );
+
 
             // Increment the score
             this.setState(prevState => ({ score: prevState.score + 1 }));
