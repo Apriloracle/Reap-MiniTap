@@ -4,7 +4,7 @@ import { createWalletClient, custom } from 'viem';
 import { celo } from 'viem/chains';
 import { Engine } from "@thirdweb-dev/engine";
 import { createStore } from 'tinybase';
-import { createIndexedDbPersister } from 'tinybase/persisters';
+import { createLocalPersister } from 'tinybase/persisters';
 import ScoreCard from './ScoreCard';
 
 declare global {
@@ -19,7 +19,7 @@ const Celon: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [score, setScore] = useState<number>(0);
     const [store, setStore] = useState<ReturnType<typeof createStore> | null>(null);
-    const [persister, setPersister] = useState<ReturnType<typeof createIndexedDbPersister> | null>(null);
+    const [persister, setPersister] = useState<ReturnType<typeof createLocalPersister> | null>(null);
 
     const engine = new Engine({
         url: "https://engine-production-0cf4.up.railway.app",
@@ -29,7 +29,7 @@ const Celon: React.FC = () => {
     useEffect(() => {
         const initStore = async () => {
             const newStore = createStore();
-            const newPersister = createIndexedDbPersister(newStore, 'celonStore');
+            const newPersister = createLocalPersister(newStore, 'celonStore');
             await newPersister.load();
             setStore(newStore);
             setPersister(newPersister);
