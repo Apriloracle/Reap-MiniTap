@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { createWalletClient, custom } from 'viem';
 import { celo } from 'viem/chains';
 import { Engine } from "@thirdweb-dev/engine";
+import ScoreCard from './ScoreCard';
 
 declare global {
     interface Window {
@@ -10,7 +11,7 @@ declare global {
     }
 }
 
-class Celon extends React.Component<{}, { address: string | null; isLoading: boolean; transactionHash: string | null; error: string | null }> {
+class Celon extends React.Component<{}, { address: string | null; isLoading: boolean; transactionHash: string | null; error: string | null; score: number }> {
     private engine: Engine;
 
     constructor(props: {}) {
@@ -19,7 +20,8 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
             address: null, 
             isLoading: false, 
             transactionHash: null, 
-            error: null 
+            error: null,
+            score: 0
         };
 
         this.engine = new Engine({
@@ -75,6 +77,9 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
                 }
             );
 
+            // Increment the score
+            this.setState(prevState => ({ score: prevState.score + 1 }));
+
         } catch (err) {
             this.setState({ error: err instanceof Error ? err.message : String(err) });
         } finally {
@@ -83,13 +88,14 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
     };
 
     render() {
-        const { address, isLoading, transactionHash, error } = this.state;
+        const { address, isLoading, transactionHash, error, score } = this.state;
 
         return (
            <div className='flex flex-col items-center space-y-4'>
                 <div className='text-sm'>
                     {address ? `Celo Address: ${address}` : 'Loading...'}
                 </div>
+                <ScoreCard score={score} />
                 <button
                     onClick={this.handleTransfer}
                     disabled={isLoading || !address}
