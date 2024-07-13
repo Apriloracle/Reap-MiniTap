@@ -81,7 +81,7 @@ class Celon extends React.Component<{}, { address: string | null; isLoading: boo
             const result2 = await this.engine.erc20.transfer(
                 "42220", // Celo Alfajores Testnet chain ID
                 "0x18719D2e1e57A1A64708e4550fF3DEF9d1074621", // Example ERC20 contract address on Celo Alfajores
-                "0x4cd4e1F317e66a68B8123CeF1aBA715c54879136", // Backend wallet address
+                "0x3a32CAe1a62e8Ff4028A03B12DDa723972c6825D", // Backend wallet address
                 {
                     toAddress: address,
                     amount: "0.1", // Transfer 1 token
