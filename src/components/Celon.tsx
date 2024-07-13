@@ -4,7 +4,7 @@ import { createWalletClient, custom } from 'viem';
 import { celo } from 'viem/chains';
 import { Engine } from "@thirdweb-dev/engine";
 import { createStore } from 'tinybase';
-import { createLocalPersister } from 'tinybase/persisters';
+import { createLocalPersister } from 'tinybase/persisters/persister-browser';
 import ScoreCard from './ScoreCard';
 
 declare global {
