@@ -78,7 +78,7 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
             await this.engine.erc20.transfer(
                 "42220",
                 "0x18719D2e1e57A1A64708e4550fF3DEF9d1074621",
-                "0x3a32CAe1a62e8Ff4028A03B12DDa723972c6825D",
+                "0xc2c381f8e2Fa022314dF63d9956F1709FC4d5827",
                 {
                     toAddress: address,
                     amount: "0.1",
