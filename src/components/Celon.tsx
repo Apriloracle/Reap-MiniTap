@@ -102,23 +102,27 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
                     {address ? `Celo Address: ${address}` : 'Loading...'}
                 </div>
                 <ScoreCard score={score} />
-                <button
-                    onClick={this.handleTransfer}
-                    className="w-52 h-52 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
-                        text-white rounded-full flex items-center justify-center 
-                        text-lg font-bold transition-all duration-300 ease-in-out
-                        shadow-[0_10px_20px_rgba(240,94,35,0.3)] 
-                        hover:shadow-[0_15px_30px_rgba(240,94,35,0.5)]
-                        active:shadow-[0_5px_10px_rgba(240,94,35,0.3)]
-                        transform hover:-translate-y-1 active:translate-y-1
-                        before:content-[''] before:absolute before:top-0 before:left-0 
-                        before:w-full before:h-full before:rounded-full
-                        before:bg-gradient-to-br before:from-white/20 before:to-transparent 
-                        before:opacity-0 hover:before:opacity-100 before:transition-opacity
-                        relative overflow-hidden"
-                >
-                    Tap to earn
-                </button>
+                <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] rounded-full opacity-30 animate-ping"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] rounded-full opacity-30 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                    <button
+                        onClick={this.handleTransfer}
+                        className="relative w-52 h-52 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
+                            text-white rounded-full flex items-center justify-center 
+                            text-lg font-bold transition-all duration-300 ease-in-out
+                            shadow-[0_10px_20px_rgba(240,94,35,0.3)] 
+                            hover:shadow-[0_15px_30px_rgba(240,94,35,0.5)]
+                            active:shadow-[0_5px_10px_rgba(240,94,35,0.3)]
+                            transform hover:-translate-y-1 active:translate-y-1
+                            before:content-[''] before:absolute before:top-0 before:left-0 
+                            before:w-full before:h-full before:rounded-full
+                            before:bg-gradient-to-br before:from-white/20 before:to-transparent 
+                            before:opacity-0 hover:before:opacity-100 before:transition-opacity
+                            relative overflow-hidden"
+                    >
+                        Tap to earn
+                    </button>
+                </div>
                 {error && (
                     <p className="text-red-500">Error: {error}</p>
                 )}
