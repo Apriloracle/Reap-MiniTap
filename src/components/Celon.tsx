@@ -97,28 +97,34 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
         const { address, error, score } = this.state;
 
         return (
-           <div className='flex flex-col items-center space-y-4'>
+          <div className='flex flex-col items-center space-y-4'>
                 <div className='text-sm'>
                     {address ? `Celo Address: ${address}` : 'Loading...'}
                 </div>
-                <ScoreCard score={score} />
+                <div className="text-[#FFA500] text-4xl font-bold mb-8">
+                    {score.toLocaleString()}
+                </div>
+                <div className="relative w-48 h-48">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#1E1E1E] to-black rounded-xl transform rotate-45"></div>
+                    <div className="absolute inset-2 bg-gradient-to-br from-[#FF6B00] to-[#FF3D00] rounded-xl transform rotate-45"></div>
+                    <div className="absolute inset-3 bg-black rounded-lg transform rotate-45 flex items-center justify-center">
+                        <svg className="w-16 h-16 text-[#FF6B00]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L1 21h22L12 2zm0 3.84L19.36 19H4.64L12 5.84zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/>
+                        </svg>
+                    </div>
+                </div>
                 <button
                     onClick={this.handleTransfer}
-                    className="w-52 h-52 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
-                        text-white rounded-full flex items-center justify-center 
-                        text-lg font-bold transition-all duration-300 ease-in-out
-                        shadow-[0_10px_20px_rgba(240,94,35,0.3)] 
-                        hover:shadow-[0_15px_30px_rgba(240,94,35,0.5)]
-                        active:shadow-[0_5px_10px_rgba(240,94,35,0.3)]
-                        transform hover:-translate-y-1 active:translate-y-1
-                        before:content-[''] before:absolute before:top-0 before:left-0 
-                        before:w-full before:h-full before:rounded-full
-                        before:bg-gradient-to-br before:from-white/20 before:to-transparent 
-                        before:opacity-0 hover:before:opacity-100 before:transition-opacity
-                        relative overflow-hidden"
+                    disabled={isLoading || !address}
+                    className="mt-4 px-6 py-2 bg-[#FF6B00] text-white rounded-full font-bold"
                 >
-                    Tap to earn
+                    {isLoading ? 'Processing...' : 'Tap'}
                 </button>
+                {transactionHash && (
+                    <p className="text-green-500">
+                        Transfer successful! Transaction hash: {transactionHash}
+                    </p>
+                )}
                 {error && (
                     <p className="text-red-500">Error: {error}</p>
                 )}
