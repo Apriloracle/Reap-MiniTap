@@ -21,10 +21,15 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
             error: null,
             score: 0
         };
+        
+        const accessToken = process.env.NEXT_PUBLIC_THIRDWEB_ENGINE_ACCESS_TOKEN;
+        if (!accessToken) {
+            throw new Error("Thirdweb Engine access token is not set in environment variables");
+        }
 
         this.engine = new Engine({
             url: "https://engine-production-8cfe.up.railway.app",
-            accessToken: "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIweDhkRjQzNkMxMGNmOUQwNzVkZjlhN0QxNGQ1NjJkZDdBZThBMkRlRGEiLCJzdWIiOiIweDMxQUI2MzdiRDMyNWI0QkY1MDE4YjM5REQxNTU2ODFEMDMzNDgxODkiLCJhdWQiOiJ0aGlyZHdlYi5jb20iLCJleHAiOjQ4NzQ1NzIzNDksIm5iZiI6MTcyMDk3MjM0OSwiaWF0IjoxNzIwOTcyMzQ5LCJqdGkiOiIwMTFlNWU2NS0zMDBiLTQyNmMtODAzYy0yODkxMmQ0YmJhOTUiLCJjdHgiOnsicGVybWlzc2lvbnMiOiJBRE1JTiJ9fQ.MHhjZjM3M2RkNzJhMzdhOGYxNjJhM2NiMTdkODlhNDVjNTI3MjE1ZTE1YzM1YzRhMzExMmIyZmM0NzM0MjE4ODM5MjlkNmFmY2MyNzgyMWQ1NzU0MDRiNWExZTEyYTkwMWFmZGQ4MTU1YTMyZTNhNWJhNGJhMDMwZWU2ZTk0OTg0ZTFj",
+            accessToken: accessToken,
         });
     }
 
