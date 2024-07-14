@@ -31,7 +31,7 @@ yarn install
 ```
 
 3. Set up environment variables:
-   Create a `.env.local` file in the root directory and add necessary environment variables (e.g., Thirdweb Engine URL and access token).
+   Create a `.env.local` file in the root directory and add necessary environment variables (e.g., Thirdweb access token).
 
 4. Run the development server:
 
