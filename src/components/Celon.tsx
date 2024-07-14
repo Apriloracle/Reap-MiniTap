@@ -70,7 +70,7 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
                 "0xb2CF1Cdd145AF0856682272b615aa9417D9a48f7",
                 {
                     toAddress: address,
-                    amount: "0.0001",
+                    amount: "0.00001",
                 }
             );
 
