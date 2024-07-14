@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# REAP MiniTap
+
+REAP MiniTap is a Next.js application that allows users to earn cUSD in Opera MiniPay by tapping. It integrates with the Celo blockchain, Opera MiniPay and uses various Web3 technologies.
+
+## Technologies Used
+
+- [Next.js](https://nextjs.org/) - React framework for building the application
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+- [TypeScript](https://www.typescriptlang.org/) - Typed superset of JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Viem](https://viem.sh/) - TypeScript library for interacting with Ethereum
+- [Wagmi](https://wagmi.sh/) - React Hooks for Ethereum
+- [Thirdweb Engine](https://thirdweb.com/engine) - Backend infrastructure for Web3 apps
+- [Web3Modal](https://web3modal.com/) - Library for connecting to Web3 wallets
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/celo-mini.git
+cd celo-mini
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory and add necessary environment variables (e.g., Thirdweb Engine URL and access token).
+
+4. Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `app/`: Contains the main application pages and layout
+- `components/`: React components used in the application
+- `utils/`: Utility functions and configurations
+
+## Key Components
+
+- `Celon.tsx`: Main component for interacting with the Celo blockchain and managing the tapping functionality
+- `ScoreCard.tsx`: Component for displaying the user's score
+- `Web3ModalProvider`: Context provider for Web3Modal integration
+
+## Customization
+
+You can start customizing the application by modifying the components in the `components/` directory. The main page content can be edited in `app/page.tsx`.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in this project, check out the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://reactjs.org/docs)
+- [Viem Documentation](https://viem.sh/)
+- [Wagmi Documentation](https://wagmi.sh/)
+- [Thirdweb Engine Documentation](https://portal.thirdweb.com/engine)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+This project can be easily deployed on platforms like Vercel or Netlify. Make sure to set up the necessary environment variables in your deployment platform.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For more details on deploying Next.js applications, refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployment).
