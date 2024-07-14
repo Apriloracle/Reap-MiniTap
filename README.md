@@ -18,8 +18,8 @@ REAP MiniTap is a Next.js application that allows users to earn cUSD in Opera Mi
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/celo-mini.git
-cd celo-mini
+git clone https://github.com/your-username/reap-minitap.git
+cd reap-minitap
 ```
 
 2. Install dependencies:
