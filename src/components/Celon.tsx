@@ -97,7 +97,7 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
         const { address, error, score } = this.state;
 
         return (
-<div className='flex flex-col items-center space-y-4'>
+     <div className='flex flex-col items-center space-y-4'>
                 <div className='text-sm'>
                     {address ? `Celo Address: ${address}` : 'Loading...'}
                 </div>
@@ -110,15 +110,19 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
                         className="relative w-52 h-52 bg-gradient-to-br from-[#f05e23] to-[#d54d1b] 
                             text-white rounded-full flex items-center justify-center 
                             text-lg font-bold transition-all duration-300 ease-in-out
-                            shadow-[0_10px_20px_rgba(240,94,35,0.3)] 
-                            hover:shadow-[0_15px_30px_rgba(240,94,35,0.5)]
-                            active:shadow-[0_5px_10px_rgba(240,94,35,0.3)]
+                            shadow-[0_10px_20px_rgba(240,94,35,0.3),inset_0_-5px_10px_rgba(0,0,0,0.2)] 
+                            hover:shadow-[0_15px_30px_rgba(240,94,35,0.5),inset_0_-7px_15px_rgba(0,0,0,0.3)]
+                            active:shadow-[0_5px_10px_rgba(240,94,35,0.3),inset_0_-2px_5px_rgba(0,0,0,0.2)]
                             transform hover:-translate-y-1 active:translate-y-1
                             before:content-[''] before:absolute before:top-0 before:left-0 
                             before:w-full before:h-full before:rounded-full
-                            before:bg-gradient-to-br before:from-white/20 before:to-transparent 
-                            before:opacity-0 hover:before:opacity-100 before:transition-opacity
-                            relative overflow-hidden"
+                            before:bg-gradient-to-b before:from-white/30 before:to-transparent 
+                            before:opacity-100 hover:before:opacity-80 active:before:opacity-50 before:transition-opacity
+                            overflow-hidden"
+                        style={{
+                            textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                            boxShadow: '0 10px 20px rgba(240,94,35,0.3), inset 0 -5px 10px rgba(0,0,0,0.2), 0 0 0 6px rgba(240,94,35,0.2), 0 0 0 12px rgba(240,94,35,0.1)',
+                        }}
                     >
                         Tap to earn
                     </button>
