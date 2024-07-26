@@ -1,6 +1,8 @@
+'use client'
 import React, { useState, useEffect } from 'react';
 import { createWalletClient, custom } from 'viem';
 import { celo } from 'viem/chains';
+import { Engine } from "@thirdweb-dev/engine";
 import ScoreCard from './ScoreCard';
 
 declare global {
@@ -10,6 +12,8 @@ declare global {
 }
 
 class Celon extends React.Component<{}, { address: string | null; error: string | null; score: number }> {
+    private engine: Engine;
+
     constructor(props: {}) {
         super(props);
         this.state = { 
@@ -17,6 +21,16 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
             error: null,
             score: 0
         };
+        
+        const accessToken = process.env.NEXT_PUBLIC_THIRDWEB_ENGINE_ACCESS_TOKEN;
+        if (!accessToken) {
+            throw new Error("Thirdweb Engine access token is not set in environment variables");
+        }
+
+        this.engine = new Engine({
+            url: "https://engine-production-8cfe.up.railway.app",
+            accessToken: accessToken,
+        });
     }
 
     componentDidMount() {
