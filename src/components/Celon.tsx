@@ -54,7 +54,7 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
                 throw new Error("Celo address not found");
             }
 
-            const response = await fetch('https://YOUR_REGION-YOUR_PROJECT_ID.cloudfunctions.net/handleTap', {
+            const response = await fetch('https://us-central1-fourth-buffer-421320.cloudfunctions.net/handleTap', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
