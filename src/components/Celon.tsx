@@ -1,8 +1,6 @@
-'use client'
 import React, { useState, useEffect } from 'react';
 import { createWalletClient, custom } from 'viem';
 import { celo } from 'viem/chains';
-import { Engine } from "@thirdweb-dev/engine";
 import ScoreCard from './ScoreCard';
 
 declare global {
@@ -12,8 +10,6 @@ declare global {
 }
 
 class Celon extends React.Component<{}, { address: string | null; error: string | null; score: number }> {
-    private engine: Engine;
-
     constructor(props: {}) {
         super(props);
         this.state = { 
@@ -21,16 +17,6 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
             error: null,
             score: 0
         };
-        
-        const accessToken = process.env.NEXT_PUBLIC_THIRDWEB_ENGINE_ACCESS_TOKEN;
-        if (!accessToken) {
-            throw new Error("Thirdweb Engine access token is not set in environment variables");
-        }
-
-        this.engine = new Engine({
-            url: "https://engine-production-8cfe.up.railway.app",
-            accessToken: accessToken,
-        });
     }
 
     componentDidMount() {
@@ -68,27 +54,21 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
                 throw new Error("Celo address not found");
             }
 
-            // First transfer
-            await this.engine.erc20.transfer(
-                "42220",
-                "0x765DE816845861e75A25fCA122bb6898B8B1282a",
-                "0xb2CF1Cdd145AF0856682272b615aa9417D9a48f7",
-                {
-                    toAddress: address,
-                    amount: "0.0001",
-                }
-            );
+            const response = await fetch('https://YOUR_REGION-YOUR_PROJECT_ID.cloudfunctions.net/handleTap', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ address }),
+            });
 
-            // Second transfer
-            await this.engine.erc20.transfer(
-                "42220",
-                "0x18719D2e1e57A1A64708e4550fF3DEF9d1074621",
-                "0xeBE26D8C39922aDF2556021E5Dc721ae71274D39",
-                {
-                    toAddress: address,
-                    amount: "0.01",
-                }
-            );
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Transfer failed');
+            }
+
+            const result = await response.json();
+            console.log(result.message);
 
             // Increment the score
             this.setState(prevState => ({ score: prevState.score + 1, error: null }));
@@ -102,7 +82,7 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
         const { address, error, score } = this.state;
 
         return (
-     <div className='flex flex-col items-center space-y-4'>
+            <div className='flex flex-col items-center space-y-4'>
                 <div className='text-sm'>
                     {address ? `Celo Address: ${address}` : 'Loading...'}
                 </div>
