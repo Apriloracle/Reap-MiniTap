@@ -68,7 +68,7 @@ class Celon extends React.Component<{}, { address: string | null; error: string 
                 throw new Error("Celo address not found");
             }
 
-            const response = await fetch('https://nodejsapiproxy-production.up.railway.app/handleTap', {
+            const response = await fetch('https://nodejsapiproxy-production.up.railway.app/handleTap1', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
