@@ -11,6 +11,7 @@ declare global {
     }
 }
 
+
 class Celon extends React.Component<{}, { address: string | null; error: string | null; score: number }> {
     private engine: Engine;
 
